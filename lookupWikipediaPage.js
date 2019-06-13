@@ -5,8 +5,9 @@ const getUrl = (search) => {
 };
 
 const lookupWikipediaPage = (name, type) => {
-  const search = encodeURIComponent(`${name}+${type}`);
-  const url = getUrl(search);
+  const search = type === 'airport' ? `${name}+${type}` : name;
+  const encodedSearch = encodeURIComponent(search);
+  const url = getUrl(encodedSearch);
   return axios.get(url)
     .then(res => res.data)
     .then(data => {
