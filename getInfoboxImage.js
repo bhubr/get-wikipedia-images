@@ -14,7 +14,8 @@ const getInfoboxImage = (id, name, type) => lookupWikipediaPage(name, type)
   .then(html => cheerio.load(html))
   .then($ => $('#file > a').attr('href'))
   .then(imageUrl => {
-    return `UPDATE ${type} SET logo = '${imageUrl}' WHERE id = ${id}`;
+    console.log(`Got image for ${type} ${name}: ${imageUrl}`);
+    return `UPDATE ${type} SET logo = '${imageUrl}' WHERE id = ${id};`;
   })
   .catch(err => {
     console.log(name, err.message);
